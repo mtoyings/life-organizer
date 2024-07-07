@@ -1,0 +1,21 @@
+.task_column_header {
+    display: flex;
+    align-items: center;
+    height: 10vh;
+
+}
+
+
+.task_column_icon {
+    width: 30px;
+    margin-right: 5px;
+}
+
+.task_column_heading {
+    font-family: "Rubik", sans-serif;
+    font-weight: 300;
+}
+
+.task_column {
+    margin-right: 10px;
+}

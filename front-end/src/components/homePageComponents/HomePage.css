@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+/* 
+body {
+    font-family: "Paytone One", sans-serif;
+} */
+
 .user_profile_pic {
     width: 200px;
     height: 200px;
@@ -6,8 +12,9 @@
 }
 
 .welcome_msg {
-    margin-top: 5%;
+    margin-top: 2%;
     font-size: 38px;
+    font-family: "Paytone One", sans-serif;
 }
 
 .change_page {

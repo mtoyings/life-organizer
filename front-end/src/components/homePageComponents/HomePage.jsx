@@ -1,8 +1,8 @@
 import React from 'react'
-import avatarIcon from "../assets/ava.png"
 import "./HomePage.css"
-import ToDoPage from './ToDoPage'
+import ToDoPage from '../toDoPageComponents/ToDoPage'
 import { useNavigate } from 'react-router-dom';
+import avatarIcon from '../../assets/ava.png'
 
 const HomePage = () => {
     const navigate = useNavigate();

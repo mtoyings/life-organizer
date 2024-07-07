@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+.app {
+    display: grid;
+    grid-template-rows: 150px auto;
+}
+
+.app_main {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 8%;
+}
+
+.task_column {
+    width: 33.33%;
+    margin: 20px;
+}
+
+.back_home_page {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FAE785;
+    border-color: #FAE785;
+    border-radius: 5px;
+    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+}
