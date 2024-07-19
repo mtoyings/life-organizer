@@ -5,12 +5,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-
 const TaskForm = ({ setTasks }) => {
     const [taskData, setTaskData] = useState({
         task: "",
+        description: "",
         status: "todo",
-        tags: []
+        tags: [],
+        deadline: new Date()
     })
     const [date, setDate] = useState(new Date());
     const [inputVisible, setInputVisible] = useState(false);
@@ -22,6 +23,7 @@ const TaskForm = ({ setTasks }) => {
     const checkTag = (tag) => {
         return taskData.tags.some(item => item === tag)
     }
+
 
     const selectTag = (tag) => {
         if (taskData.tags.some(item => item === tag)) {
@@ -36,6 +38,7 @@ const TaskForm = ({ setTasks }) => {
         }
     };
     const handleChange = (e) => {
+
         const { name, value } = e.target;
 
         // return all prev properties and replace w the new field and value
@@ -44,16 +47,35 @@ const TaskForm = ({ setTasks }) => {
         })
     }
 
+    const handleChangeDeadline = (e) => {
+
+        // const { name, value } = e.target;
+
+        // return all prev properties and replace w the new field and value
+        setTaskData(prev => {
+            return { ...prev, deadline: e.toString() }
+        })
+        setDate(e)
+        console.log(date)
+        console.log(taskData)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(taskData)
         setTasks(prev => {
             return [...prev, taskData]
         })
+        setCurrentTag("")
+        setEditTag("")
+        setTagLists([])
+        setDate(Date.now)
         setTaskData({
             task: "",
+            description: "",
             status: "todo",
-            tags: []
+            tags: [],
+            deadline: new Date()
         })
 
     }
@@ -74,7 +96,11 @@ const TaskForm = ({ setTasks }) => {
 
     const handleAddTagInsert = () => {
         setTagLists([...tagLists, currentTag]);
+        setTaskData(prev => {
+            return { ...prev, tags: [...prev.tags, currentTag] }
+        })
         setCurrentTag('');
+        console.log(taskData)
         setInputVisible(false);
     }
 
@@ -122,16 +148,17 @@ const TaskForm = ({ setTasks }) => {
     return (
         <header className='app_header'>
             <form
+                style={{ width: '80%' }}
                 onSubmit={handleSubmit}>
                 <input type="text"
                     name="task" className='task_input' placeholder='Enter your task'
                     onChange={handleChange}
                     value={taskData.task}
                 />
-                <input type="text"
-                    name="task" className='description_input' placeholder='Enter task description'
+                <textarea type="text"
+                    name="description" className='description_input' placeholder='Enter task description'
                     onChange={handleChange}
-                    value={taskData.task}
+                    value={taskData.description}
                 />
                 <div className='task_form_bottom_line'>
                     <div className='tags_select'>
@@ -150,7 +177,8 @@ const TaskForm = ({ setTasks }) => {
                                             autoFocus
                                         />
                                     ) : (
-                                        <span className="tag_display" onClick={() => handleItemClick(index)}>{tag}
+                                        <span className="tag_display" onClick={() => handleItemClick(index)}>
+                                            {tag}
                                             <button className="remove-button" onClick={() => handleRemoveItem(index)}>x</button>
                                         </span>
 
@@ -169,7 +197,7 @@ const TaskForm = ({ setTasks }) => {
                                 autoFocus
                             />
                         )}
-                        <button type="button" className='add_tags' onClick={() => handleAddTagClick()}> + </button>
+                        <button type="button" className='add_tags_button' onClick={() => handleAddTagClick()}> + </button>
 
                     </div>
                     <div className='status_select'>
@@ -186,7 +214,11 @@ const TaskForm = ({ setTasks }) => {
                         </select>
                         {/* </div> */}
                         <p>Deadline: </p>
-                        <DatePicker className='deadline_picker' selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/YYYY" />
+                        <DatePicker className='deadline_picker'
+                            selected={date}
+                            onChange={handleChangeDeadline}
+                            dateFormat="dd/MM/YYYY"
+                        />
                         <button type='submit' className='task_submit'> + Add Task</button>
                     </div>
 

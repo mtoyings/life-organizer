@@ -7,13 +7,15 @@ const TaskColumn = ({ columnName, icon, tasks, status, handleDelete }) => {
     // console.log(Todo)
     return (
         <section className='task_column'>
-            <h2 className='task_column_heading'>
+            <p className='task_column_heading' style={{ fontSize: '20px' }}>
                 {icon} {columnName}
-            </h2>
+            </p>
             {tasks.map((task, index) => task.status === status &&
                 < TaskCard key={index}
                     title={task.task}
+                    description={task.description}
                     tags={task.tags}
+                    deadline={task.deadline}
                     handleDelete={handleDelete}
                     index={index} />)}
         </section>
